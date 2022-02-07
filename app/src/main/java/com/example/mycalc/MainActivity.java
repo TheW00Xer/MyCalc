@@ -22,8 +22,13 @@ public class MainActivity extends AppCompatActivity {
         Button buttonPlus = (Button) findViewById(R.id.buttonPlus);
         buttonPlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                if (numberOne.getText().toString().equals("")){
+                    numberOne.setText(String.valueOf(0));
+                }
                 int one = Integer.parseInt(String.valueOf(numberOne.getText()));
-
+                if (numberTwo.getText().toString().equals("")){
+                    numberTwo.setText(String.valueOf(0));
+                }
                 int two = Integer.parseInt(String.valueOf(numberTwo.getText()));
 
                 int resultPlus = one + two;
@@ -34,8 +39,13 @@ public class MainActivity extends AppCompatActivity {
         Button buttonMinus = (Button) findViewById(R.id.buttonMinus);
         buttonMinus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                if (numberOne.getText().toString().equals("")){
+                    numberOne.setText(String.valueOf(0));
+                }
                 int one = Integer.parseInt(String.valueOf(numberOne.getText()));
-
+                if (numberTwo.getText().toString().equals("")){
+                    numberTwo.setText(String.valueOf(0));
+                }
                 int two = Integer.parseInt(String.valueOf(numberTwo.getText()));
 
                 int resultPlus = one - two;
@@ -46,8 +56,14 @@ public class MainActivity extends AppCompatActivity {
         Button buttonMultiply = (Button) findViewById(R.id.buttonMultiply);
         buttonMultiply.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                if (numberOne.getText().toString().equals("")){
+                    numberOne.setText(String.valueOf(0));
+                }
                 int one = Integer.parseInt(String.valueOf(numberOne.getText()));
 
+                if (numberTwo.getText().toString().equals("")){
+                    numberTwo.setText(String.valueOf(0));
+                }
                 int two = Integer.parseInt(String.valueOf(numberTwo.getText()));
 
                 int resultPlus = one * two;
@@ -58,8 +74,20 @@ public class MainActivity extends AppCompatActivity {
         Button buttonDivide = (Button) findViewById(R.id.buttonDivide);
         buttonDivide.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                if (numberOne.getText().toString().equals("")){
+                    numberOne.setText(String.valueOf(1));
+                }
+                if (numberOne.getText().toString().equals("0")){
+                    numberOne.setText(String.valueOf(1));
+                }
                 int one = Integer.parseInt(String.valueOf(numberOne.getText()));
 
+                if (numberTwo.getText().toString().equals("")){
+                    numberTwo.setText(String.valueOf(1));
+                }
+                if (numberTwo.getText().toString().equals("0")){
+                    numberTwo.setText(String.valueOf(1));
+                }
                 int two = Integer.parseInt(String.valueOf(numberTwo.getText()));
 
                 int resultPlus = one / two;
