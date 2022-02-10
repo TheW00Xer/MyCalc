@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textViewResult = (TextView) findViewById(R.id.textViewResult);
         Button buttonPlus = (Button) findViewById(R.id.buttonPlus);
         buttonPlus.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 if (numberOne.getText().toString().equals("")){
                     numberOne.setText(String.valueOf(0));
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
                 int resultPlus = one + two;
                 Log.i("MainActivity", String.valueOf(resultPlus));
                 textViewResult.setText(String.valueOf(resultPlus));
+
+
             }
         });
         Button buttonMinus = (Button) findViewById(R.id.buttonMinus);
