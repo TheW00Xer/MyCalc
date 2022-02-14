@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MyCalc</string>
+    <string name="firstNumber">Enter first number</string>
+    <string name="secondNumber">Enter second number</string>
+    <string name="add">+</string>
+    <string name="subtract">-</string>
+    <string name="multiply">x</string>
+    <string name="divide">÷</string>
+    <string name="resultValue">Result</string>
+    <string name="errorMessage">Error</string>
 </resources>
