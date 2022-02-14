@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MyCalc</string>
+    <string name="inputvalue">number</string>
+    <string name="multiply">x</string>
+    <string name="subtract">-</string>
+    <string name="add">+</string>
+    <string name="divide">÷</string>
+    <string name="help">Please input numbers</string>
+
 </resources>

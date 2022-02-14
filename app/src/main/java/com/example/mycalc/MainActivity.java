@@ -1,8 +1,9 @@
 package com.example.mycalc;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,87 +17,152 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText numberOne = (EditText) findViewById(R.id.editTextNumber1);
-        EditText numberTwo = (EditText) findViewById(R.id.editTextNumber2);
         TextView textViewResult = (TextView) findViewById(R.id.textViewResult);
         Button buttonPlus = (Button) findViewById(R.id.buttonPlus);
-        buttonPlus.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                if (numberOne.getText().toString().equals("")){
-                    numberOne.setText(String.valueOf(0));
-                }
-                int one = Integer.parseInt(String.valueOf(numberOne.getText()));
-                if (numberTwo.getText().toString().equals("")){
-                    numberTwo.setText(String.valueOf(0));
-                }
-                int two = Integer.parseInt(String.valueOf(numberTwo.getText()));
-
-                int resultPlus = one + two;
-                Log.i("MainActivity", String.valueOf(resultPlus));
-                textViewResult.setText(String.valueOf(resultPlus));
-
-
-            }
-        });
+        buttonPlus.setEnabled(false);
         Button buttonMinus = (Button) findViewById(R.id.buttonMinus);
-        buttonMinus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                if (numberOne.getText().toString().equals("")){
-                    numberOne.setText(String.valueOf(0));
-                }
-                int one = Integer.parseInt(String.valueOf(numberOne.getText()));
-                if (numberTwo.getText().toString().equals("")){
-                    numberTwo.setText(String.valueOf(0));
-                }
-                int two = Integer.parseInt(String.valueOf(numberTwo.getText()));
-
-                int resultPlus = one - two;
-                Log.i("MainActivity", String.valueOf(resultPlus));
-                textViewResult.setText(String.valueOf(resultPlus));
-            }
-        });
+        buttonMinus.setEnabled(false);
         Button buttonMultiply = (Button) findViewById(R.id.buttonMultiply);
-        buttonMultiply.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+        buttonMultiply.setEnabled(false);
+        Button buttonDivide = (Button) findViewById(R.id.buttonDivide);
+        buttonDivide.setEnabled(false);
+
+        EditText numberOne = (EditText) findViewById(R.id.editTextNumber1);
+        numberOne.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (numberOne.getText().toString().equals("")){
-                    numberOne.setText(String.valueOf(0));
+                    buttonPlus.setEnabled(false);
+                    buttonMinus.setEnabled(false);
+                    buttonMultiply.setEnabled(false);
+                    buttonDivide.setEnabled(false);
+                    textViewResult.setText("Please input numbers.");
+                } else {
+                    buttonPlus.setEnabled(true);
+                    buttonMinus.setEnabled(true);
+                    buttonMultiply.setEnabled(true);
+                    buttonDivide.setEnabled(true);
                 }
-                int one = Integer.parseInt(String.valueOf(numberOne.getText()));
+            }
 
-                if (numberTwo.getText().toString().equals("")){
-                    numberTwo.setText(String.valueOf(0));
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (numberOne.getText().toString().equals("")){
+                    buttonPlus.setEnabled(false);
+                    buttonMinus.setEnabled(false);
+                    buttonMultiply.setEnabled(false);
+                    buttonDivide.setEnabled(false);
+                    textViewResult.setText("Please input numbers.");
+                } else {
+                    buttonPlus.setEnabled(true);
+                    buttonMinus.setEnabled(true);
+                    buttonMultiply.setEnabled(true);
+                    buttonDivide.setEnabled(true);
                 }
-                int two = Integer.parseInt(String.valueOf(numberTwo.getText()));
+            }
 
-                int resultPlus = one * two;
-                Log.i("MainActivity", String.valueOf(resultPlus));
-                textViewResult.setText(String.valueOf(resultPlus));
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (numberOne.getText().toString().equals("")){
+                    buttonPlus.setEnabled(false);
+                    buttonMinus.setEnabled(false);
+                    buttonMultiply.setEnabled(false);
+                    buttonDivide.setEnabled(false);
+                    textViewResult.setText("Please input numbers.");
+                } else {
+                    buttonPlus.setEnabled(true);
+                    buttonMinus.setEnabled(true);
+                    buttonMultiply.setEnabled(true);
+                    buttonDivide.setEnabled(true);
+                }
             }
         });
-        Button buttonDivide = (Button) findViewById(R.id.buttonDivide);
-        buttonDivide.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                if (numberOne.getText().toString().equals("")){
-                    numberOne.setText(String.valueOf(1));
-                }
-                if (numberOne.getText().toString().equals("0")){
-                    numberOne.setText(String.valueOf(1));
-                }
-                int one = Integer.parseInt(String.valueOf(numberOne.getText()));
 
+        EditText numberTwo = (EditText) findViewById(R.id.editTextNumber2);
+        numberTwo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (numberTwo.getText().toString().equals("")){
-                    numberTwo.setText(String.valueOf(1));
+                    buttonPlus.setEnabled(false);
+                    buttonMinus.setEnabled(false);
+                    buttonMultiply.setEnabled(false);
+                    buttonDivide.setEnabled(false);
+                    textViewResult.setText("Please input numbers.");
+                } else {
+                    buttonPlus.setEnabled(true);
+                    buttonMinus.setEnabled(true);
+                    buttonMultiply.setEnabled(true);
+                    buttonDivide.setEnabled(true);
                 }
-                if (numberTwo.getText().toString().equals("0")){
-                    numberTwo.setText(String.valueOf(1));
-                }
-                int two = Integer.parseInt(String.valueOf(numberTwo.getText()));
-
-                int resultPlus = one / two;
-                Log.i("MainActivity", String.valueOf(resultPlus));
-                textViewResult.setText(String.valueOf(resultPlus));
             }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (numberTwo.getText().toString().equals("")){
+                    buttonPlus.setEnabled(false);
+                    buttonMinus.setEnabled(false);
+                    buttonMultiply.setEnabled(false);
+                    buttonDivide.setEnabled(false);
+                    textViewResult.setText("Please input numbers.");
+                } else {
+                    buttonPlus.setEnabled(true);
+                    buttonMinus.setEnabled(true);
+                    buttonMultiply.setEnabled(true);
+                    buttonDivide.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (numberTwo.getText().toString().equals("")){
+                    buttonPlus.setEnabled(false);
+                    buttonMinus.setEnabled(false);
+                    buttonMultiply.setEnabled(false);
+                    buttonDivide.setEnabled(false);
+                    textViewResult.setText("Please input numbers.");
+                } else {
+                    buttonPlus.setEnabled(true);
+                    buttonMinus.setEnabled(true);
+                    buttonMultiply.setEnabled(true);
+                    buttonDivide.setEnabled(true);
+                }
+            }
+        });
+        buttonPlus.setOnClickListener(view -> {
+            int one = Integer.parseInt(String.valueOf(numberOne.getText()));
+            int two = Integer.parseInt(String.valueOf(numberTwo.getText()));
+            int resultVal = one + two;
+            Log.i("MainActivity", String.valueOf(resultVal));
+            textViewResult.setText(String.valueOf(resultVal));
+        });
+
+        buttonMinus.setOnClickListener(view -> {
+            int one = Integer.parseInt(String.valueOf(numberOne.getText()));
+            int two = Integer.parseInt(String.valueOf(numberTwo.getText()));
+            int resultVal = one - two;
+            Log.i("MainActivity", String.valueOf(resultVal));
+            textViewResult.setText(String.valueOf(resultVal));
+        });
+
+        buttonMultiply.setOnClickListener(view -> {
+            int one = Integer.parseInt(String.valueOf(numberOne.getText()));
+            int two = Integer.parseInt(String.valueOf(numberTwo.getText()));
+            int resultVal = one * two;
+            Log.i("MainActivity", String.valueOf(resultVal));
+            textViewResult.setText(String.valueOf(resultVal));
+        });
+
+        buttonDivide.setOnClickListener(view -> {
+            int one = Integer.parseInt(String.valueOf(numberOne.getText()));
+            int two = Integer.parseInt(String.valueOf(numberTwo.getText()));
+                if (numberTwo.getText().toString().equals("0")){
+                    textViewResult.setText("Error");
+                } else {
+                    int resultVal = one / two;
+                    Log.i("MainActivity", String.valueOf(resultVal));
+                    textViewResult.setText(String.valueOf(resultVal));
+                }
+
         });
     }
 }
