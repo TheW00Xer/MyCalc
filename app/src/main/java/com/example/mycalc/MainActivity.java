@@ -5,18 +5,31 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    public double getInt(EditText editText) {              //getInt is function name, (EditText editText) is declaration of object type we are working with and it's name
-        String text = (editText.getText().toString());  //we created variable "text" it's type is String and it is equal to value of editText which we got (.getText) and converted it to String (.toString)
-        if (text.equals("")) {                          //possible to use "==" instead of equal
-            editText.setText("0");                      //after executing function we set "editText" value to 0 if the condition is met
-            return 0;                                   //return ends this section "if" of the function
+    //public double getInt(EditText editText) {           //getInt is function name, (EditText editText) is declaration of object type we are working with and it's name
+    //    String text = (editText.getText().toString());  //we created variable "text" it's type is String and it is equal to value of editText which we got (.getText) and converted it to String (.toString)
+    //    if (text.equals("")) {                          //possible to use "==" instead of equal
+    //        editText.setText("0");                      //after executing function we set "editText" value to 0 if the condition is met
+    //        return 0;                                   //return ends this section "if" of the function
+    //    }
+    //    else {
+    //        return Integer.parseInt(text);              //if condition isn't met function will return us the original value of variable "text"
+    //    }
+    //}
+
+    public double getInt(int viewId) {
+        EditText text = findViewById(viewId);
+        String message = text.getText().toString();
+        if (message.equals("")) {
+            text.setText("0");
+            return 0;
         }
         else {
-            return Integer.parseInt(text);              //if condition isn't met function will return us the original value of variable "text"
+            return Integer.parseInt(message);
         }
     }
     //EXAMPLE FUNCTION
@@ -33,46 +46,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText numberOne = findViewById(R.id.editTextNumber1);
-        EditText numberTwo = findViewById(R.id.editTextNumber2);
         TextView textViewResult = findViewById(R.id.textViewResult);
 
         Button buttonPlus = findViewById(R.id.buttonPlus);
         buttonPlus.setOnClickListener(view -> {
-            double one = getInt(numberOne);
-            double two = getInt(numberTwo);
-            double resultOf = one + two;
+            double resultOf = getInt(R.id.editTextNumber1) + getInt(R.id.editTextNumber2);
             Log.i("MainActivity", String.valueOf(resultOf));
             textViewResult.setText(String.valueOf(resultOf));
         });
 
         Button buttonMinus = findViewById(R.id.buttonMinus);
         buttonMinus.setOnClickListener(view -> {
-            double one = getInt(numberOne);
-            double two = getInt(numberTwo);
-            double resultOf = one - two;
+            double resultOf = getInt(R.id.editTextNumber1) - getInt(R.id.editTextNumber2);
             Log.i("MainActivity", String.valueOf(resultOf));
             textViewResult.setText(String.valueOf(resultOf));
         });
 
         Button buttonMultiply = findViewById(R.id.buttonMultiply);
         buttonMultiply.setOnClickListener(view -> {
-            double one = getInt(numberOne);
-            double two = getInt(numberTwo);
-            double resultOf = one * two;
+            double resultOf = getInt(R.id.editTextNumber1) * getInt(R.id.editTextNumber2);
             Log.i("MainActivity", String.valueOf(resultOf));
             textViewResult.setText(String.valueOf(resultOf));
         });
 
         Button buttonDivide = findViewById(R.id.buttonDivide);
         buttonDivide.setOnClickListener(view -> {
-            double one = getInt(numberOne);
-            double two = getInt(numberTwo);
-            if (two == 0) {
+            if (getInt(R.id.editTextNumber2) == 0) {
                 textViewResult.setText(R.string.errorMessage);
             }
             else {
-                double resultOf = one / two;
+                double resultOf = getInt(R.id.editTextNumber1) / getInt(R.id.editTextNumber2);
                 Log.i("MainActivity", String.valueOf(resultOf));
                 textViewResult.setText(String.valueOf(resultOf));
             }
