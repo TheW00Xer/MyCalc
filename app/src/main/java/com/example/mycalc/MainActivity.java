@@ -8,49 +8,36 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+import com.robotemi.sdk.Robot;
+import com.robotemi.sdk.listeners.OnRobotReadyListener;
 
-    //public double getInt(EditText editText) {           //getInt is function name, (EditText editText) is declaration of object type we are working with and it's name
-    //    String text = (editText.getText().toString());  //we created variable "text" it's type is String and it is equal to value of editText which we got (.getText) and converted it to String (.toString)
-    //    if (text.equals("")) {                          //possible to use "==" instead of equal
-    //        editText.setText("0");                      //after executing function we set "editText" value to 0 if the condition is met
-    //        return 0;                                   //return ends this section "if" of the function
-    //    }
-    //    else {
-    //        return Integer.parseInt(text);              //if condition isn't met function will return us the original value of variable "text"
-    //    }
-    //}
+public class MainActivity extends AppCompatActivity implements OnRobotReadyListener {
+    Robot mRobot;
+    String TAG;
 
-    public double getInt(int viewId) {
-        EditText text = findViewById(viewId);
-        String message = text.getText().toString();
+    public double getInt(int viewId) {                  //function called getInt, is using object view Id (int viewId) to find object
+        EditText text = findViewById(viewId);           //declared object type EditText as "text" which is found using viewId
+        String message = text.getText().toString();     //created variable "message" type "String" which value we get from object "text"
         if (message.equals("")) {
-            text.setText("0");
+            text.setText("0");                          //if value of "message" equals nothing, "text" value is set to "0" to prevent app from crashing in case of missing value
             return 0;
         }
         else {
-            return Integer.parseInt(message);
+            return Integer.parseInt(message);           //if value of "message" equals any number, we return this value back
         }
     }
-    //EXAMPLE FUNCTION
-    //public int function(int value) {
-    //    if (value >1) {
-    //        return 1;
-    //    }
-    //    else {
-    //        return 0;
-    //    }
-    //}
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mRobot = Robot.getInstance();
         TextView textViewResult = findViewById(R.id.textViewResult);
 
         Button buttonPlus = findViewById(R.id.buttonPlus);
         buttonPlus.setOnClickListener(view -> {
-            double resultOf = getInt(R.id.editTextNumber1) + getInt(R.id.editTextNumber2);
+            double resultOf = getInt(R.id.editTextNumber1) + getInt(R.id.editTextNumber2);      //calling out function "getInt" to get values for number1 and number2
             Log.i("MainActivity", String.valueOf(resultOf));
             textViewResult.setText(String.valueOf(resultOf));
         });
@@ -80,6 +67,28 @@ public class MainActivity extends AppCompatActivity {
                 textViewResult.setText(String.valueOf(resultOf));
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mRobot.addOnRobotReadyListener(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        mRobot.removeOnRobotReadyListener(this);
+    }
+
+    @Override
+    public void onRobotReady(boolean isReady) {
+        if (isReady) {
+            Log.i(TAG, "Robot is ready");
+            mRobot.hideTopBar();
+        }
     }
 }
 
